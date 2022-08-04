@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "105383173568",
+    "firebase_url": "https://healingkuy-a8fa2-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "healingkuy-a8fa2",
+    "storage_bucket": "healingkuy-a8fa2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:105383173568:android:27f5b00fe7104db45d3c25",
+        "android_client_info": {
+          "package_name": "com.fightingspirit.healingkuy"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "105383173568-kck2oqalqj5jlugaev45rhvh6h9htgf8.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAPXtgvGa5ARgRP6zjUl5BS9ZMUNPsvgYY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "105383173568-kck2oqalqj5jlugaev45rhvh6h9htgf8.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
