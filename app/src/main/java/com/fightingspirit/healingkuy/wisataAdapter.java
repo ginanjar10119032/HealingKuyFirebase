@@ -1,4 +1,6 @@
 package com.fightingspirit.healingkuy;
+import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,13 +10,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
 
+import java.util.Map;
+
 public class wisataAdapter extends FirebaseRecyclerAdapter<
         wisata, wisataAdapter.personsViewholder> {
 
+    Context context;
     public wisataAdapter(
-            @NonNull FirebaseRecyclerOptions<wisata> options)
+            @NonNull FirebaseRecyclerOptions<wisata> options, Context context)
     {
         super(options);
+        this.context = context;
     }
 
     // Function to bind the view in Card view(here
@@ -42,6 +48,14 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         holder.alamat.setText(model.getAlamat());
     }
 
+    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+        @Override
+        public void onClick(View view) {
+            Intent i = new Intent(context, MapActivity.class);
+            context.startActivity(i);
+        }
+    };
+
     // Function to tell the class about the Card view (here
     // "wisata.xml")in
     // which the data will be shown
@@ -54,6 +68,7 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.wisata, parent, false);
+        view.setOnClickListener(mOnClickListener);
         return new wisataAdapter.personsViewholder(view);
     }
 
@@ -72,4 +87,5 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
             alamat = itemView.findViewById(R.id.alamat);
         }
     }
+
 }

@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
                 .build();
         // Connecting object of required Adapter class to
         // the Adapter class itself
-        adapter = new wisataAdapter(options);
+        adapter = new wisataAdapter(options, MainActivity.this);
         // Connecting Adapter class with the Recycler view*/
         recyclerView.setAdapter(adapter);
     }
