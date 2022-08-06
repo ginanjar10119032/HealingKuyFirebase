@@ -53,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
     {
         super.onStart();
         adapter.startListening();
+        adapter.notifyDataSetChanged();
     }
 
     // Function to tell the app to stop getting

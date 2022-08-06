@@ -13,9 +13,11 @@ import com.firebase.ui.database.FirebaseRecyclerOptions;
 import java.util.Map;
 
 public class wisataAdapter extends FirebaseRecyclerAdapter<
-        wisata, wisataAdapter.personsViewholder> {
+        wisata, wisataAdapter.personsViewholder> implements View.OnClickListener {
 
     Context context;
+    int bindAdapter;
+
     public wisataAdapter(
             @NonNull FirebaseRecyclerOptions<wisata> options, Context context)
     {
@@ -48,13 +50,6 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         holder.alamat.setText(model.getAlamat());
     }
 
-//    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-//        @Override
-//        public void onClick(View view) {
-//            Intent i = new Intent(context, MapActivity.class);
-//            context.startActivity(i);
-//        }
-//    };
 
     // Function to tell the class about the Card view (here
     // "wisata.xml")in
@@ -68,14 +63,21 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.wisata, parent, false);
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent i = new Intent(context, MapActivity.class);
-                context.startActivity(i);
-            }
-        });
+
+//        view.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                Intent i = new Intent(context, MapActivity.class);
+//                context.startActivity(i);
+//            }
+//        });
         return new wisataAdapter.personsViewholder(view);
+    }
+
+    @Override
+    public void onClick(View view) {
+
     }
 
     // Sub Class to create references of the views in Crad
@@ -87,10 +89,17 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         {
             super(itemView);
 
-            lokasi
-                    = itemView.findViewById(R.id.lokasi);
+            lokasi = itemView.findViewById(R.id.lokasi);
             nama = itemView.findViewById(R.id.nama);
             alamat = itemView.findViewById(R.id.alamat);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    Intent i = new Intent(view.getContext(), MapActivity.class);
+                    view.getContext().startActivity(i);
+                }
+            });
         }
     }
 
