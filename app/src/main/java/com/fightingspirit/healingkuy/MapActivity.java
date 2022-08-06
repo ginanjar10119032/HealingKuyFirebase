@@ -9,6 +9,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
@@ -25,6 +26,7 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     private GoogleMap mMap;
     private MapView mapView;
     public TextView lokasi, nama, alamat;
+    public ImageView foto;
 
 //    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
 //    {
@@ -39,9 +41,9 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
 //                             Bundle savedInstanceState)
 //    {
 //        View view = inflater.inflate(R.layout.activity_map, container, false);
-//        lokasi = view.findViewById(R.id.txt1);
-//        nama = view.findViewById(R.id.txt2);
-//        alamat = view.findViewById(R.id.txt3);
+//        lokasi = view.findViewById(R.id.lokasi);
+//        nama = view.findViewById(R.id.nama);
+//        alamat = view.findViewById(R.id.alamat);
 //
 //        lokasi.setText("");
 //        nama.setText("");

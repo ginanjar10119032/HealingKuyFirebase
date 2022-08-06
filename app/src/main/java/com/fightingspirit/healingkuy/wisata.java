@@ -2,6 +2,7 @@ package com.fightingspirit.healingkuy;
 
 public class wisata
 {
+    private String foto;
     private String lokasi;
     private String nama;
     private String alamat;
@@ -9,6 +10,14 @@ public class wisata
     public wisata() {}
 
     // Getter and setter method
+    public String getFoto()
+    {
+        return foto;
+    }
+    public void setFoto(String foto)
+    {
+        this.foto = foto;
+    }
     public String getLokasi()
     {
         return lokasi;

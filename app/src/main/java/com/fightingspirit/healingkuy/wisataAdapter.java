@@ -4,16 +4,24 @@ import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+import com.squareup.picasso.Picasso;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.firebase.ui.database.FirebaseRecyclerAdapter;
 import com.firebase.ui.database.FirebaseRecyclerOptions;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.util.Map;
 
 public class wisataAdapter extends FirebaseRecyclerAdapter<
-        wisata, wisataAdapter.personsViewholder> implements View.OnClickListener {
+        wisata, wisataAdapter.wisataViewholder> implements View.OnClickListener {
 
     Context context;
     int bindAdapter;
@@ -25,54 +33,30 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         this.context = context;
     }
 
-    // Function to bind the view in Card view(here
-    // "wisata.xml") iwth data in
-    // model class(here "wisata.class")
     @Override
     protected void
-    onBindViewHolder(@NonNull personsViewholder holder,
+    onBindViewHolder(@NonNull wisataViewholder holder,
                      int position, @NonNull wisata model)
     {
 
-        // Add lokasi from model class (here
-        // "wisata.class")to appropriate view in Card
-        // view (here "wisata.xml")
         holder.lokasi.setText(model.getLokasi());
 
-        // Add nama from model class (here
-        // "wisata.class")to appropriate view in Card
-        // view (here "wisata.xml")
         holder.nama.setText(model.getNama());
 
-        // Add alamat from model class (here
-        // "wisata.class")to appropriate view in Card
-        // view (here "wisata.xml")
         holder.alamat.setText(model.getAlamat());
     }
 
 
-    // Function to tell the class about the Card view (here
-    // "wisata.xml")in
-    // which the data will be shown
     @NonNull
     @Override
-    public personsViewholder
+    public wisataViewholder
     onCreateViewHolder(@NonNull ViewGroup parent,
                        int viewType)
     {
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.wisata, parent, false);
-
-//        view.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                Intent i = new Intent(context, MapActivity.class);
-//                context.startActivity(i);
-//            }
-//        });
-        return new wisataAdapter.personsViewholder(view);
+        return new wisataAdapter.wisataViewholder(view);
     }
 
     @Override
@@ -80,15 +64,15 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
 
     }
 
-    // Sub Class to create references of the views in Crad
-    // view (here "wisata.xml")
-    class personsViewholder
+    class wisataViewholder
             extends RecyclerView.ViewHolder {
         TextView lokasi, nama, alamat;
-        public personsViewholder(@NonNull View itemView)
-        {
+        ImageView foto;
+
+        public wisataViewholder(@NonNull View itemView) {
             super(itemView);
 
+            foto = itemView.findViewById(R.id.foto);
             lokasi = itemView.findViewById(R.id.lokasi);
             nama = itemView.findViewById(R.id.nama);
             alamat = itemView.findViewById(R.id.alamat);
@@ -100,7 +84,26 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
                     view.getContext().startActivity(i);
                 }
             });
+            FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
+
+            DatabaseReference databaseReference = firebaseDatabase.getReference();
+
+            DatabaseReference getImage = databaseReference.child("image");
+
+            getImage.addListenerForSingleValueEvent(new ValueEventListener() {
+                @Override
+                public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                    String link = dataSnapshot.getValue(String.class);
+
+                    Picasso.get().load(link).into(foto);
+                }
+
+                @Override
+                public void onCancelled(@NonNull DatabaseError databaseError) {
+                    // we are showing that error message in toast
+                    Toast.makeText(context, "Error Loading Image", Toast.LENGTH_SHORT).show();
+                }
+            });
         }
     }
-
 }
