@@ -48,13 +48,13 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         holder.alamat.setText(model.getAlamat());
     }
 
-    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
-        @Override
-        public void onClick(View view) {
-            Intent i = new Intent(context, MapActivity.class);
-            context.startActivity(i);
-        }
-    };
+//    private final View.OnClickListener mOnClickListener = new View.OnClickListener() {
+//        @Override
+//        public void onClick(View view) {
+//            Intent i = new Intent(context, MapActivity.class);
+//            context.startActivity(i);
+//        }
+//    };
 
     // Function to tell the class about the Card view (here
     // "wisata.xml")in
@@ -68,7 +68,13 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         View view
                 = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.wisata, parent, false);
-        view.setOnClickListener(mOnClickListener);
+        view.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(context, MapActivity.class);
+                context.startActivity(i);
+            }
+        });
         return new wisataAdapter.personsViewholder(view);
     }
 
