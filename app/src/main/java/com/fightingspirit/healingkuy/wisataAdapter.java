@@ -1,6 +1,7 @@
 package com.fightingspirit.healingkuy;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,11 +34,13 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
         this.context = context;
     }
 
-    @Override
+     @Override
     protected void
     onBindViewHolder(@NonNull wisataViewholder holder,
                      int position, @NonNull wisata model)
     {
+
+        Picasso.get().load(model.getFoto()).into(holder.foto);
 
         holder.lokasi.setText(model.getLokasi());
 
@@ -88,7 +91,7 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
 
             DatabaseReference databaseReference = firebaseDatabase.getReference();
 
-            DatabaseReference getImage = databaseReference.child("image");
+            DatabaseReference getImage = databaseReference.child("foto");
 
             getImage.addListenerForSingleValueEvent(new ValueEventListener() {
                 @Override
@@ -100,7 +103,6 @@ public class wisataAdapter extends FirebaseRecyclerAdapter<
 
                 @Override
                 public void onCancelled(@NonNull DatabaseError databaseError) {
-                    // we are showing that error message in toast
                     Toast.makeText(context, "Error Loading Image", Toast.LENGTH_SHORT).show();
                 }
             });

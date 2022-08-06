@@ -28,29 +28,6 @@ public class MapActivity extends FragmentActivity implements OnMapReadyCallback 
     public TextView lokasi, nama, alamat;
     public ImageView foto;
 
-//    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
-//    {
-//        super.onViewCreated(view, savedInstanceState);
-//        mapView = view.findViewById(R.id.map);
-//        mapView.onCreate(savedInstanceState);
-//        mapView.onResume();
-//        mapView.getMapAsync(this);
-//    }
-//
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState)
-//    {
-//        View view = inflater.inflate(R.layout.activity_map, container, false);
-//        lokasi = view.findViewById(R.id.lokasi);
-//        nama = view.findViewById(R.id.nama);
-//        alamat = view.findViewById(R.id.alamat);
-//
-//        lokasi.setText("");
-//        nama.setText("");
-//        alamat.setText("");
-//        return view;
-//    }
-
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
